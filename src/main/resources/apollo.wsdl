@@ -1,0 +1,713 @@
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://webservices.ftdpartners.ic.pi.ftd.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="OrderServiceImplService" targetNamespace="http://webservices.ftdpartners.ic.pi.ftd.com/">
+    <wsdl:types>
+        <xs:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://webservices.ftdpartners.ic.pi.ftd.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" elementFormDefault="unqualified" targetNamespace="http://webservices.ftdpartners.ic.pi.ftd.com/" version="1.0">
+            <xs:element name="BillingData">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Name">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="FirstName" type="xs:string"/>
+                                    <xs:element minOccurs="0" name="MiddleName" type="xs:string"/>
+                                    <xs:element name="LastName" type="xs:string"/>
+                                    <xs:element minOccurs="0" name="BusinessName" type="xs:string"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element minOccurs="0" name="Address" type="tns:BillingAddress"/>
+                        <xs:element minOccurs="0" name="PhoneNumber" type="tns:BillingPhoneNumber"/>
+                        <xs:element name="EmailAddress" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="CustomFields">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="CustomField">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element minOccurs="0" name="Name" type="xs:string"/>
+                                    <xs:element minOccurs="0" name="Value" type="xs:string"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="FTDFeed" nillable="true" type="xs:anyType"/>
+            <xs:element name="FulfillmentData">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Name">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="FirstName" type="xs:string"/>
+                                    <xs:element minOccurs="0" name="MiddleName" type="xs:string"/>
+                                    <xs:element name="LastName" type="xs:string"/>
+                                    <xs:element minOccurs="0" name="BusinessName" type="xs:string"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="Address" type="tns:FulFillmentAddress"/>
+                        <xs:element name="PhoneNumber" type="tns:FulFillmentPhoneNumber"/>
+                        <xs:element minOccurs="0" name="EmailAddress" type="xs:string"/>
+                        <xs:element minOccurs="0" name="MorningDelivery" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GiftWrapData">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="GiftWrapMessage" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ItemPrice">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ItemTotal" type="xs:string"/>
+                        <xs:element name="ItemRetailPrice" type="xs:string"/>
+                        <xs:element minOccurs="0" name="ItemSalePrice" type="xs:string"/>
+                        <xs:element minOccurs="0" name="ItemAddOnRetailPrice" type="xs:string"/>
+                        <xs:element minOccurs="0" name="ItemAddOnSalePrice" type="xs:string"/>
+                        <xs:element minOccurs="0" name="ItemShippingServiceFeeTotal" type="xs:string"/>
+                        <xs:element minOccurs="0" name="ItemTaxTotal" type="xs:string"/>
+                        <xs:element minOccurs="0" name="Commission" type="xs:string"/>
+                        <xs:element minOccurs="0" name="ItemDiscountCode" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Name">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="FirstName" type="xs:string"/>
+                        <xs:element minOccurs="0" name="MiddleName" type="xs:string"/>
+                        <xs:element name="LastName" type="xs:string"/>
+                        <xs:element minOccurs="0" name="BusinessName" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Order">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="JointCart" type="tns:JointCartType"/>
+                        <xs:element name="PartnerId" type="xs:string"/>
+                        <xs:element name="OrderDate" type="xs:string"/>
+                        <xs:element minOccurs="0" name="CurrencyCode" type="xs:string"/>
+                        <xs:element name="OrderTotals">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element minOccurs="0" name="OrderTotal" type="xs:string"/>
+                                    <xs:element minOccurs="0" name="OrderRetailPriceTotal" type="xs:string"/>
+                                    <xs:element minOccurs="0" name="OrderSalePriceTotal" type="xs:string"/>
+                                    <xs:element minOccurs="0" name="OrderAddOnRetailPriceTotal" type="xs:string"/>
+                                    <xs:element minOccurs="0" name="OrderAddOnSalePriceTotal" type="xs:string"/>
+                                    <xs:element minOccurs="0" name="OrderShippingServiceFeeTotal" type="xs:string"/>
+                                    <xs:element minOccurs="0" name="OrderTaxTotal" type="xs:string"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="BillingData">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="Name">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="FirstName" type="xs:string"/>
+                                                <xs:element minOccurs="0" name="MiddleName" type="xs:string"/>
+                                                <xs:element name="LastName" type="xs:string"/>
+                                                <xs:element minOccurs="0" name="BusinessName" type="xs:string"/>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                    <xs:element minOccurs="0" name="Address" type="tns:BillingAddress"/>
+                                    <xs:element minOccurs="0" name="PhoneNumber" type="tns:BillingPhoneNumber"/>
+                                    <xs:element name="EmailAddress" type="xs:string"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element maxOccurs="unbounded" name="OrderItem">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="SKU" type="xs:string"/>
+                                    <xs:element minOccurs="0" name="Add-Ons">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element maxOccurs="unbounded" minOccurs="1" name="Add-On">
+                                                    <xs:complexType>
+                                                        <xs:sequence>
+                                                            <xs:element name="SKU" type="tns:AddOnSKUType"/>
+                                                            <xs:element name="RetailPrice" type="tns:AddOnRetailPriceType"/>
+                                                            <xs:element name="SalePrice" type="tns:AddOnSalePriceType"/>
+                                                            <xs:element name="Quantity" type="tns:PositiveInteger"/>
+                                                        </xs:sequence>
+                                                    </xs:complexType>
+                                                </xs:element>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                        <xs:unique name="AddOnIdUnique1">
+                                            <xs:selector xpath="Add-On"/>
+                                            <xs:field xpath="SKU"/>
+                                        </xs:unique>
+                                    </xs:element>
+                                    <xs:element minOccurs="0" name="Title" type="xs:string"/>
+                                    <xs:element minOccurs="0" name="DeliveryStartDate" type="xs:string"/>
+                                    <xs:element minOccurs="0" name="DeliveryEndDate" type="xs:string"/>
+                                    <xs:element minOccurs="0" name="DeliveryLocationType" type="xs:string"/>
+                                    <xs:element minOccurs="0" name="SpecialInstructions" type="xs:string"/>
+                                    <xs:element minOccurs="0" name="CustomFields">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element maxOccurs="unbounded" minOccurs="0" name="CustomField">
+                                                    <xs:complexType>
+                                                        <xs:sequence>
+                                                            <xs:element minOccurs="0" name="Name" type="xs:string"/>
+                                                            <xs:element minOccurs="0" name="Value" type="xs:string"/>
+                                                        </xs:sequence>
+                                                    </xs:complexType>
+                                                </xs:element>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                    <xs:element name="FulfillmentData">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="Name">
+                                                    <xs:complexType>
+                                                        <xs:sequence>
+                                                            <xs:element name="FirstName" type="xs:string"/>
+                                                            <xs:element minOccurs="0" name="MiddleName" type="xs:string"/>
+                                                            <xs:element name="LastName" type="xs:string"/>
+                                                            <xs:element minOccurs="0" name="BusinessName" type="xs:string"/>
+                                                        </xs:sequence>
+                                                    </xs:complexType>
+                                                </xs:element>
+                                                <xs:element name="Address" type="tns:FulFillmentAddress"/>
+                                                <xs:element name="PhoneNumber" type="tns:FulFillmentPhoneNumber"/>
+                                                <xs:element minOccurs="0" name="EmailAddress" type="xs:string"/>
+                                                <xs:element minOccurs="0" name="MorningDelivery" type="xs:string"/>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                    <xs:element minOccurs="0" name="Occasion" type="xs:string"/>
+                                    <xs:element minOccurs="0" name="GiftWrapData">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element minOccurs="0" name="GiftWrapMessage" type="xs:string"/>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                    <xs:element name="ItemPrice">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="ItemTotal" type="xs:string"/>
+                                                <xs:element name="ItemRetailPrice" type="xs:string"/>
+                                                <xs:element minOccurs="0" name="ItemSalePrice" type="xs:string"/>
+                                                <xs:element minOccurs="0" name="ItemAddOnRetailPrice" type="xs:string"/>
+                                                <xs:element minOccurs="0" name="ItemAddOnSalePrice" type="xs:string"/>
+                                                <xs:element minOccurs="0" name="ItemShippingServiceFeeTotal" type="xs:string"/>
+                                                <xs:element minOccurs="0" name="ItemTaxTotal" type="xs:string"/>
+                                                <xs:element minOccurs="0" name="Commission" type="xs:string"/>
+                                                <xs:element minOccurs="0" name="ItemDiscountCode" type="xs:string"/>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                                <xs:attribute name="PartnerOrderItemID" type="xs:string" use="required"/>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                    <xs:attribute name="PartnerOrderID" type="xs:string" use="required"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="OrderAcknowledgement">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="PartnerId" type="xs:string"/>
+                        <xs:element name="Status" type="tns:StatusType"/>
+                        <xs:element name="StatusCode" type="xs:string"/>
+                        <xs:element minOccurs="0" name="FailureDescription" type="xs:string"/>
+                    </xs:sequence>
+                    <xs:attribute name="PartnerOrderID" type="xs:string" use="required"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="OrderItem">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="SKU" type="xs:string"/>
+                        <xs:element minOccurs="0" name="Add-Ons">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element maxOccurs="unbounded" minOccurs="1" name="Add-On">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="SKU" type="tns:AddOnSKUType"/>
+                                                <xs:element name="RetailPrice" type="tns:AddOnRetailPriceType"/>
+                                                <xs:element name="SalePrice" type="tns:AddOnSalePriceType"/>
+                                                <xs:element name="Quantity" type="tns:PositiveInteger"/>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                            <xs:unique name="AddOnIdUnique2">
+                                <xs:selector xpath="Add-On"/>
+                                <xs:field xpath="SKU"/>
+                            </xs:unique>
+                        </xs:element>
+                        <xs:element minOccurs="0" name="Title" type="xs:string"/>
+                        <xs:element minOccurs="0" name="DeliveryStartDate" type="xs:string"/>
+                        <xs:element minOccurs="0" name="DeliveryEndDate" type="xs:string"/>
+                        <xs:element minOccurs="0" name="DeliveryLocationType" type="xs:string"/>
+                        <xs:element minOccurs="0" name="SpecialInstructions" type="xs:string"/>
+                        <xs:element minOccurs="0" name="CustomFields">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element maxOccurs="unbounded" minOccurs="0" name="CustomField">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element minOccurs="0" name="Name" type="xs:string"/>
+                                                <xs:element minOccurs="0" name="Value" type="xs:string"/>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="FulfillmentData">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="Name">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="FirstName" type="xs:string"/>
+                                                <xs:element minOccurs="0" name="MiddleName" type="xs:string"/>
+                                                <xs:element name="LastName" type="xs:string"/>
+                                                <xs:element minOccurs="0" name="BusinessName" type="xs:string"/>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                    <xs:element name="Address" type="tns:FulFillmentAddress"/>
+                                    <xs:element name="PhoneNumber" type="tns:FulFillmentPhoneNumber"/>
+                                    <xs:element minOccurs="0" name="EmailAddress" type="xs:string"/>
+                                    <xs:element minOccurs="0" name="MorningDelivery" type="xs:string"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element minOccurs="0" name="Occasion" type="xs:string"/>
+                        <xs:element minOccurs="0" name="GiftWrapData">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element minOccurs="0" name="GiftWrapMessage" type="xs:string"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="ItemPrice">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="ItemTotal" type="xs:string"/>
+                                    <xs:element name="ItemRetailPrice" type="xs:string"/>
+                                    <xs:element minOccurs="0" name="ItemSalePrice" type="xs:string"/>
+                                    <xs:element minOccurs="0" name="ItemAddOnRetailPrice" type="xs:string"/>
+                                    <xs:element minOccurs="0" name="ItemAddOnSalePrice" type="xs:string"/>
+                                    <xs:element minOccurs="0" name="ItemShippingServiceFeeTotal" type="xs:string"/>
+                                    <xs:element minOccurs="0" name="ItemTaxTotal" type="xs:string"/>
+                                    <xs:element minOccurs="0" name="Commission" type="xs:string"/>
+                                    <xs:element minOccurs="0" name="ItemDiscountCode" type="xs:string"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                    <xs:attribute name="PartnerOrderItemID" type="xs:string" use="required"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="OrderTotals">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="OrderTotal" type="xs:string"/>
+                        <xs:element minOccurs="0" name="OrderRetailPriceTotal" type="xs:string"/>
+                        <xs:element minOccurs="0" name="OrderSalePriceTotal" type="xs:string"/>
+                        <xs:element minOccurs="0" name="OrderAddOnRetailPriceTotal" type="xs:string"/>
+                        <xs:element minOccurs="0" name="OrderAddOnSalePriceTotal" type="xs:string"/>
+                        <xs:element minOccurs="0" name="OrderShippingServiceFeeTotal" type="xs:string"/>
+                        <xs:element minOccurs="0" name="OrderTaxTotal" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="createOrderRequest" type="tns:createOrderRequest"/>
+            <xs:element name="createOrderResponse" type="tns:createOrderResponse"/>
+            <xs:element name="submitOrderFeed" type="tns:submitOrderFeed"/>
+            <xs:element name="submitOrderFeedResponse" type="tns:submitOrderFeedResponse"/>
+            <xs:complexType name="submitOrderFeed">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="FTDRequest" type="tns:createOrderRequest"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="createOrderRequest">
+                <xs:sequence>
+                    <xs:element name="FTDOrders">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="Order">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element minOccurs="0" name="JointCart" type="tns:JointCartType"/>
+                                            <xs:element name="PartnerId" type="tns:PartnerIdType"/>
+                                            <xs:element name="OrderDate" type="tns:OrderDateType"/>
+                                            <xs:element minOccurs="0" name="CurrencyCode" type="xs:string"/>
+                                            <xs:element name="OrderTotals">
+                                                <xs:complexType>
+                                                    <xs:sequence>
+                                                        <xs:element minOccurs="0" name="OrderTotal" type="xs:string"/>
+                                                        <xs:element minOccurs="0" name="OrderRetailPriceTotal" type="xs:string"/>
+                                                        <xs:element minOccurs="0" name="OrderSalePriceTotal" type="xs:string"/>
+                                                        <xs:element minOccurs="0" name="OrderAddOnRetailPriceTotal" type="xs:string"/>
+                                                        <xs:element minOccurs="0" name="OrderAddOnSalePriceTotal" type="xs:string"/>
+                                                        <xs:element minOccurs="0" name="OrderShippingServiceFeeTotal" type="xs:string"/>
+                                                        <xs:element minOccurs="0" name="OrderTaxTotal" type="xs:string"/>
+                                                    </xs:sequence>
+                                                </xs:complexType>
+                                            </xs:element>
+                                            <xs:element name="BillingData">
+                                                <xs:complexType>
+                                                    <xs:sequence>
+                                                        <xs:element name="Name">
+                                                            <xs:complexType>
+                                                                <xs:sequence>
+                                                                    <xs:element name="FirstName" type="tns:FirstNameType"/>
+                                                                    <xs:element minOccurs="0" name="MiddleName" type="xs:string"/>
+                                                                    <xs:element name="LastName" type="tns:LastNameType"/>
+                                                                    <xs:element minOccurs="0" name="BusinessName" type="xs:string"/>
+                                                                </xs:sequence>
+                                                            </xs:complexType>
+                                                        </xs:element>
+                                                        <xs:element minOccurs="0" name="Address" type="tns:BillingAddress"/>
+                                                        <xs:element minOccurs="0" name="PhoneNumber" type="tns:BillingPhoneNumber"/>
+                                                        <xs:element name="EmailAddress" type="tns:EmailAddressType"/>
+                                                    </xs:sequence>
+                                                </xs:complexType>
+                                            </xs:element>
+                                            <xs:element maxOccurs="unbounded" name="OrderItem">
+                                                <xs:complexType>
+                                                    <xs:sequence>
+                                                        <xs:element name="SKU" type="tns:SKUType"/>
+                                                        <xs:element minOccurs="0" name="Add-Ons">
+                                                            <xs:complexType>
+                                                                <xs:sequence>
+                                                                    <xs:element maxOccurs="unbounded" minOccurs="1" name="Add-On">
+                                                                        <xs:complexType>
+                                                                            <xs:sequence>
+                                                                                <xs:element name="SKU" type="tns:AddOnSKUType"/>
+                                                                                <xs:element name="RetailPrice" type="tns:AddOnRetailPriceType"/>
+                                                                                <xs:element name="SalePrice" type="tns:AddOnSalePriceType"/>
+                                                                                <xs:element name="Quantity" type="tns:PositiveInteger"/>
+                                                                            </xs:sequence>
+                                                                        </xs:complexType>
+                                                                    </xs:element>
+                                                                </xs:sequence>
+                                                            </xs:complexType>
+                                                            <xs:unique name="AddOnIdUnique3">
+                                                                <xs:selector xpath="Add-On"/>
+                                                                <xs:field xpath="SKU"/>
+                                                            </xs:unique>
+                                                        </xs:element>
+                                                        <xs:element minOccurs="0" name="Title" type="xs:string"/>
+                                                        <xs:element minOccurs="0" name="DeliveryStartDate" type="xs:string"/>
+                                                        <xs:element minOccurs="0" name="DeliveryEndDate" type="xs:string"/>
+                                                        <xs:element minOccurs="0" name="DeliveryLocationType" type="xs:string"/>
+                                                        <xs:element minOccurs="0" name="SpecialInstructions" type="xs:string"/>
+                                                        <xs:element minOccurs="0" name="CustomFields">
+                                                            <xs:complexType>
+                                                                <xs:sequence>
+                                                                    <xs:element maxOccurs="unbounded" minOccurs="0" name="CustomField">
+                                                                        <xs:complexType>
+                                                                            <xs:sequence>
+                                                                                <xs:element minOccurs="0" name="Name" type="xs:string"/>
+                                                                                <xs:element minOccurs="0" name="Value" type="xs:string"/>
+                                                                            </xs:sequence>
+                                                                        </xs:complexType>
+                                                                    </xs:element>
+                                                                </xs:sequence>
+                                                            </xs:complexType>
+                                                        </xs:element>
+                                                        <xs:element name="FulfillmentData">
+                                                            <xs:complexType>
+                                                                <xs:sequence>
+                                                                    <xs:element name="Name">
+                                                                        <xs:complexType>
+                                                                            <xs:sequence>
+                                                                                <xs:element name="FirstName" type="tns:FirstNameType"/>
+                                                                                <xs:element minOccurs="0" name="MiddleName" type="xs:string"/>
+                                                                                <xs:element name="LastName" type="tns:LastNameType"/>
+                                                                                <xs:element minOccurs="0" name="BusinessName" type="xs:string"/>
+                                                                            </xs:sequence>
+                                                                        </xs:complexType>
+                                                                    </xs:element>
+                                                                    <xs:element name="Address" type="tns:FulFillmentAddress"/>
+                                                                    <xs:element name="PhoneNumber" type="tns:FulFillmentPhoneNumber"/>
+                                                                    <xs:element minOccurs="0" name="EmailAddress" type="xs:string"/>
+                                                                    <xs:element minOccurs="0" name="MorningDelivery" type="xs:string"/>
+                                                                </xs:sequence>
+                                                            </xs:complexType>
+                                                        </xs:element>
+                                                        <xs:element minOccurs="0" name="Occasion" type="xs:string"/>
+                                                        <xs:element minOccurs="0" name="GiftWrapData">
+                                                            <xs:complexType>
+                                                                <xs:sequence>
+                                                                    <xs:element minOccurs="0" name="GiftWrapMessage" type="xs:string"/>
+                                                                </xs:sequence>
+                                                            </xs:complexType>
+                                                        </xs:element>
+                                                        <xs:element name="ItemPrice">
+                                                            <xs:complexType>
+                                                                <xs:sequence>
+                                                                    <xs:element name="ItemTotal" type="tns:ItemTotalType"/>
+                                                                    <xs:element name="ItemRetailPrice" type="tns:ItemRetailPriceType"/>
+                                                                    <xs:element name="ItemSalePrice" type="tns:ItemSalePriceType"/>
+                                                                    <xs:element minOccurs="0" name="ItemAddOnRetailPrice" type="xs:string"/>
+                                                                    <xs:element minOccurs="0" name="ItemAddOnSalePrice" type="xs:string"/>
+                                                                    <xs:element minOccurs="0" name="ItemShippingServiceFeeTotal" type="xs:string"/>
+                                                                    <xs:element minOccurs="0" name="ItemTaxTotal" type="xs:string"/>
+                                                                    <xs:element minOccurs="0" name="Commission" type="xs:string"/>
+                                                                    <xs:element minOccurs="0" name="ItemDiscountCode" type="xs:string"/>
+                                                                </xs:sequence>
+                                                            </xs:complexType>
+                                                        </xs:element>
+                                                    </xs:sequence>
+                                                    <xs:attribute name="PartnerOrderItemID" type="tns:OrderIdType" use="required"/>
+                                                </xs:complexType>
+                                            </xs:element>
+                                        </xs:sequence>
+                                        <xs:attribute name="PartnerOrderID" type="tns:OrderIdType" use="required"/>
+                                    </xs:complexType>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="BillingAddress">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Address1" type="xs:string"/>
+                    <xs:element minOccurs="0" name="Address2" type="xs:string"/>
+                    <xs:element minOccurs="0" name="City" type="xs:string"/>
+                    <xs:element minOccurs="0" name="State" type="xs:string"/>
+                    <xs:element minOccurs="0" name="PostalCode" type="xs:string"/>
+                    <xs:element minOccurs="0" name="Country" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="BillingPhoneNumber">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="DayTimePhone" type="xs:string"/>
+                    <xs:element minOccurs="0" name="EveningPhone" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="FulFillmentAddress">
+                <xs:sequence>
+                    <xs:element name="Address1" type="tns:AddressLineType"/>
+                    <xs:element minOccurs="0" name="Address2" type="xs:string"/>
+                    <xs:element name="City" type="tns:CityType"/>
+                    <xs:element minOccurs="0" name="State" type="xs:string"/>
+                    <xs:element minOccurs="0" name="PostalCode" type="xs:string"/>
+                    <xs:element name="Country" type="tns:CountryType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="FulFillmentPhoneNumber">
+                <xs:sequence>
+                    <xs:element name="DayTimePhone" type="tns:DayTimePhoneType"/>
+                    <xs:element minOccurs="0" name="EveningPhone" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="submitOrderFeedResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="FTDResponse" type="tns:createOrderResponse"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="createOrderResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="OrderAcknowledgements">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="OrderAcknowledgement">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element name="PartnerId" type="xs:string"/>
+                                            <xs:element name="Status" type="tns:StatusType"/>
+                                            <xs:element name="StatusCode" type="xs:string"/>
+                                            <xs:element minOccurs="0" name="FailureDescription" type="xs:string"/>
+                                        </xs:sequence>
+                                        <xs:attribute name="PartnerOrderID" type="xs:string" use="required"/>
+                                    </xs:complexType>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:simpleType name="StatusType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="Success"/>
+                    <xs:enumeration value="Failure"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="CountryType">
+                <xs:restriction base="xs:normalizedString">
+                    <xs:minLength value="1"/>
+                    <xs:maxLength value="20"/>
+                    <xs:pattern value=".*\S.*"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="DayTimePhoneType">
+                <xs:restriction base="xs:normalizedString">
+                    <xs:minLength value="1"/>
+                    <xs:maxLength value="20"/>
+                    <xs:pattern value=".*\S.*"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="FirstNameType">
+                <xs:restriction base="xs:normalizedString">
+                    <xs:minLength value="1"/>
+                    <xs:maxLength value="25"/>
+                    <xs:pattern value=".*\S.*"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="LastNameType">
+                <xs:restriction base="xs:normalizedString">
+                    <xs:minLength value="1"/>
+                    <xs:maxLength value="25"/>
+                    <xs:pattern value=".*\S.*"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="CityType">
+                <xs:restriction base="xs:normalizedString">
+                    <xs:minLength value="1"/>
+                    <xs:maxLength value="30"/>
+                    <xs:pattern value=".*\S.*"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="JointCartType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="Y"/>
+                    <xs:enumeration value="N"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="PartnerIdType">
+                <xs:restriction base="xs:normalizedString">
+                    <xs:minLength value="1"/>
+                    <xs:maxLength value="50"/>
+                    <xs:pattern value=".*\S.*"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="ItemTotalType">
+                <xs:restriction base="xs:decimal">
+                    <xs:maxInclusive value="922337203685476.00"/>
+                    <xs:minInclusive value="-922337203685476.00"/>
+                    <xs:fractionDigits fixed="true" value="2"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="ItemRetailPriceType">
+                <xs:restriction base="xs:decimal">
+                    <xs:maxInclusive value="922337203685476.00"/>
+                    <xs:minInclusive value="-922337203685476.00"/>
+                    <xs:fractionDigits fixed="true" value="2"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="ItemSalePriceType">
+                <xs:restriction base="xs:decimal">
+                    <xs:maxInclusive value="922337203685476.00"/>
+                    <xs:minInclusive value="-922337203685476.00"/>
+                    <xs:fractionDigits fixed="true" value="2"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="AddOnRetailPriceType">
+                <xs:restriction base="xs:decimal">
+                    <xs:maxInclusive value="922337203685476.00"/>
+                    <xs:minInclusive value="-922337203685476.00"/>
+                    <xs:fractionDigits fixed="true" value="2"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="AddOnSalePriceType">
+                <xs:restriction base="xs:decimal">
+                    <xs:maxInclusive value="922337203685476.00"/>
+                    <xs:minInclusive value="-922337203685476.00"/>
+                    <xs:fractionDigits fixed="true" value="2"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="OrderDateType">
+                <xs:restriction base="xs:dateTime">
+                    <xs:minInclusive value="1753-01-01T00:00:00"/>
+                    <xs:maxInclusive value="9999-12-31T23:59:59"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="EmailAddressType">
+                <xs:restriction base="xs:normalizedString">
+                    <xs:minLength value="1"/>
+                    <xs:maxLength value="100"/>
+                    <xs:pattern value=".*\S.*"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="SKUType">
+                <xs:restriction base="xs:normalizedString">
+                    <xs:minLength value="1"/>
+                    <xs:maxLength value="25"/>
+                    <xs:pattern value=".*\S.*"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="AddressLineType">
+                <xs:restriction base="xs:normalizedString">
+                    <xs:minLength value="1"/>
+                    <xs:maxLength value="45"/>
+                    <xs:pattern value=".*\S.*"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="OrderIdType">
+                <xs:restriction base="xs:normalizedString">
+                    <xs:minLength value="1"/>
+                    <xs:maxLength value="100"/>
+                    <xs:pattern value=".*\S.*"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="AddOnSKUType">
+                <xs:restriction base="xs:normalizedString">
+                    <xs:minLength value="1"/>
+                    <xs:maxLength value="25"/>
+                    <xs:pattern value=".*\S.*"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="PositiveInteger">
+                <xs:restriction base="xs:positiveInteger">
+                    <xs:maxInclusive value="2147483647"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="submitOrderFeed">
+        <wsdl:part element="tns:submitOrderFeed" name="parameters"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="submitOrderFeedResponse">
+        <wsdl:part element="tns:submitOrderFeedResponse" name="parameters"></wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="OrderService">
+        <wsdl:operation name="submitOrderFeed">
+            <wsdl:input message="tns:submitOrderFeed" name="submitOrderFeed"></wsdl:input>
+            <wsdl:output message="tns:submitOrderFeedResponse" name="submitOrderFeedResponse"></wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="OrderServiceImplServiceSoapBinding" type="tns:OrderService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="submitOrderFeed">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="submitOrderFeed">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="submitOrderFeedResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="OrderServiceImplService">
+        <wsdl:port binding="tns:OrderServiceImplServiceSoapBinding" name="OrderServiceImplPort">
+            <soap:address location="http://partner-qa02.ftdi.com/partners/FTDOrderService"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

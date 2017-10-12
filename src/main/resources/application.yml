@@ -1,2 +1,13 @@
 server:
   port: 8180
+
+client:
+  default-uri: https://partner-qa02.ftdi.com/partners/FTDOrderService
+  ssl:
+    trust-store: classpath:jks/client-truststore.jks
+    trust-store-password: client-truststore-p455w0rd
+
+logging:
+  level:
+    ROOT: INFO
+    org.springframework.ws.client.MessageTracing: TRACE
