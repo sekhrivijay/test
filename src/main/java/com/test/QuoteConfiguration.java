@@ -1,14 +1,14 @@
 package com.test;
 
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.Resource;
-import org.springframework.oxm.jaxb.Jaxb2Marshaller;
-import org.springframework.ws.soap.security.support.KeyStoreFactoryBean;
-import org.springframework.ws.soap.security.support.TrustManagersFactoryBean;
-import org.springframework.ws.transport.http.HttpsUrlConnectionMessageSender;
+//import org.springframework.beans.factory.annotation.Value;
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.context.annotation.Configuration;
+//import org.springframework.core.io.Resource;
+//import org.springframework.oxm.jaxb.Jaxb2Marshaller;
+//import org.springframework.ws.soap.security.support.KeyStoreFactoryBean;
+//import org.springframework.ws.soap.security.support.TrustManagersFactoryBean;
+//import org.springframework.ws.transport.http.HttpsUrlConnectionMessageSender;
 
 import javax.net.ssl.HostnameVerifier;
 

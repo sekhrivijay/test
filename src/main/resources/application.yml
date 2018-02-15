@@ -7,7 +7,46 @@ client:
     trust-store: classpath:jks/client-truststore.jks
     trust-store-password: client-truststore-p455w0rd
 
+
+spring.cloud.gcp.sql.database-name: testdb
+spring.cloud.gcp.sql.instance-connection-name: deep-thought-185318:us-central1:mysqlinstance
+spring.datasource.continue-on-error: true
+spring.cloud.gcp.credentials.location: file:/Users/vsekhri/apps/gcp/ee09c0442642.json
+spring.sleuth.sampler.percentage: 100.0
+#spring:
+
+#  cloud:
+#    gcp:
+#      project-id: deep-thought-185318
+#      credentials:
+#        location: file:/Users/vsekhri/apps/gcp/Project-a2ce469a674d.json
+#      sql:
+#        database-name: testdb
+#        database-type: mysql
+#        instance-connection-name: deep-thought-185318:us-central1:mysqlinstance
+
+
+service:
+  pimService:
+    baseUrl: "https://apiservice.providecommerce.com/API/Product/v1/JSON/GetProductDetail"
+
 logging:
   level:
     ROOT: INFO
     org.springframework.ws.client.MessageTracing: TRACE
+
+spring:
+  cloud:
+    gcp:
+      project-id: deep-thought-185318
+  cache:
+    type: redis
+  redis:
+#    cluster:
+##        nodes: freshdapp01v1.ftdi.com:7000,freshdapp01v1.ftdi.com:7001,freshdapp01v1.ftdi.com:7002
+#        nodes: 35.226.226.75:80
+#        max-redirects: 3
+
+    sentinel:
+      nodes: 35.226.226.75:80
+      master: mymaster
